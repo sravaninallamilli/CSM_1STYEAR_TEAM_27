@@ -1,0 +1,80 @@
+import tkinter as tk
+from tkinter import messagebox
+
+def calculate_grade():
+    try:
+        # Get marks from entry boxes
+        m1 = float(entry_m1.get())
+        physics = float(entry_physics.get())
+        beee = float(entry_beee.get())
+        c_lang = float(entry_c.get())
+        eg = float(entry_eg.get())
+
+        # Calculate total and average
+        total = m1 + physics + beee + c_lang + eg
+        average = total / 5
+        label_avg.config(text=f"Average: {average:.2f}")
+
+        # Determine grade
+        if average >= 90:
+            grade = "A+"
+        elif average >= 80:
+            grade = "A"
+        elif average >= 70:
+            grade = "B"
+        elif average >= 60:
+            grade = "C"
+        elif average >= 50:
+            grade = "D"
+        else:
+            grade = "F"
+
+        # Display grade
+        label_grade.config(text=f"Grade: {grade}")
+
+    except ValueError:
+        messagebox.showerror("Invalid Input", "Please enter valid numbers for all subjects!")
+
+# Create main window
+root = tk.Tk()
+root.title("Grade Calculator")
+root.geometry("400x480")
+root.config(bg="#e6f7ff")
+
+# Title
+tk.Label(root, text="GRADE CALCULATOR", font=("Arial", 18, "bold"), bg="#e6f7ff", fg="darkblue").pack(pady=15)
+
+# Subject labels and entries
+tk.Label(root, text="M1 (Mathematics 1):", bg="#e6f7ff", font=("Arial", 11)).pack()
+entry_m1 = tk.Entry(root)
+entry_m1.pack()
+
+tk.Label(root, text="Physics:", bg="#e6f7ff", font=("Arial", 11)).pack()
+entry_physics = tk.Entry(root)
+entry_physics.pack()
+
+tk.Label(root, text="BEEE:", bg="#e6f7ff", font=("Arial", 11)).pack()
+entry_beee = tk.Entry(root)
+entry_beee.pack()
+
+tk.Label(root, text="C Language:", bg="#e6f7ff", font=("Arial", 11)).pack()
+entry_c = tk.Entry(root)
+entry_c.pack()
+
+tk.Label(root, text="Engineering Graphics (EG):", bg="#e6f7ff", font=("Arial", 11)).pack()
+entry_eg = tk.Entry(root)
+entry_eg.pack()
+
+# Calculate button
+tk.Button(root, text="Calculate", command=calculate_grade, bg="green", fg="white",
+          font=("Arial", 12, "bold"), width=15).pack(pady=20)
+
+# Output labels
+label_avg = tk.Label(root, text="Average: ", font=("Arial", 13, "bold"), bg="#e6f7ff")
+label_avg.pack(pady=5)
+
+label_grade = tk.Label(root, text="Grade: ", font=("Arial", 13, "bold"), bg="#e6f7ff")
+label_grade.pack(pady=5)
+
+# Run the main loop
+root.mainloop()
